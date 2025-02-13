@@ -1,0 +1,47 @@
+name: Deploy AuthService to AWS EC2
+
+on:
+  push:
+    branches:
+      - test
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 🛎️ Checkout repository
+      uses: actions/checkout@v3
+
+    - name: 🐳 Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: 📦 Build Docker image
+      run: |
+        docker build -t erickuce/auth-service:latest .
+    
+    - name: 🚀 Push Docker image to Docker Hub
+      run: |
+        docker push erickuce/auth-service:latest
+
+    - name: 🔑 Connect to EC2 and deploy container
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST_AUTH }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        script: |
+          # Iniciar sesión en Docker Hub
+          sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+          # Descargar la última imagen desde Docker Hub
+          sudo docker pull erickuce/auth-service:latest
+
+          # Detener y eliminar el contenedor anterior si existe
+          sudo docker stop auth-service-container || true && sudo docker rm auth-service-container || true
+
+          # Crear el archivo .env
