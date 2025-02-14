@@ -1,13 +1,13 @@
 const axios = require('axios');
 const User = require('../models/user');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const syncUsersFromUserService = async () => {
     try {
         console.log('📌 Obteniendo usuarios de UserService...');
 
         // 🔄 Solicitar todos los usuarios de `UserService`
-        const response = await axios.get('http://localhost:5005/get-all-users'); 
+        const response = await axios.get('http://3.224.31.24:5005/get-all-users'); 
 
         if (!response.data || response.data.length === 0) {
             console.log('⚠️ No hay usuarios en UserService para sincronizar.');

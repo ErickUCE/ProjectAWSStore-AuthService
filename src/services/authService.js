@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
 
         // 🔄 Enviar el usuario a `UserService` para sincronización
         const instances = [
-            'http://127.0.0.1:5005/sync-create' ,// Microservicio de `UserService`
+            'http://54.236.104.97:5009/sync-create' ,// Microservicio de `UserService`
             
         ];
         console.log("📌 Enviando solicitud de sincronización a UserService...");
