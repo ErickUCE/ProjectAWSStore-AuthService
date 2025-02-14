@@ -34,10 +34,10 @@ router.post('/register', async (req, res) => {
 
         // 🔄 Sincronizar usuario con `UserService`
         const instances = [
-            'http://3.208.235.135:5005/sync-create', // Microservicio de `UserServiceeee`
-            'http://52.54.203.131:5006/sync-create',
-            'http://3.224.31.24:5007/sync-create',
-            'http://98.85.148.204:5008/sync-create'
+            'http://3.209.163.151:5005/sync-create', // Microservicio de `UserServiceeee`
+            'http://3.213.150.0:5006/sync-create',
+            'http://13.216.141.108:5007/sync-create',
+            'http://3.231.45.95:5008/sync-create'
         ];
 
         for (const instance of instances) {
