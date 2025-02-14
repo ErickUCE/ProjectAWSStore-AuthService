@@ -34,10 +34,10 @@ router.post('/register', async (req, res) => {
 
         // 🔄 Sincronizar usuario con `UserService`
         const instances = [
-            'http://localhost:5005/sync-create', // Microservicio de `UserService`
-            'http://localhost:5006/sync-create',
-            'http://localhost:5007/sync-create',
-            'http://localhost:5008/sync-create'
+            'http://3.208.235.135:5005/sync-create', // Microservicio de `UserServiceeee`
+            'http://52.54.203.131:5006/sync-create',
+            'http://3.224.31.24:5007/sync-create',
+            'http://98.85.148.204:5008/sync-create'
         ];
 
         for (const instance of instances) {
@@ -53,7 +53,7 @@ router.post('/register', async (req, res) => {
                 });
                 console.log(`✅ Usuario sincronizado con ${instance}`);
             } catch (error) {
-                console.error(`❌ Error sincronizando con ${instance}:`, error.message);
+                console.error(`❌ Error error sincronizando con ${instance}:`, error.message);
             }
         }
 
