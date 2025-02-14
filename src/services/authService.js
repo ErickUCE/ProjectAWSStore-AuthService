@@ -68,7 +68,7 @@ router.post('/register', async (req, res) => {
         
                 console.log(`✅ Usuario sincronizado correctamente con ${instance}:`, response.data);
             } catch (error) {
-                console.error(`❌ Error sincronizando connn ${instance}:`, error.response?.data || error.message);
+                console.error(`❌ Error  authservice sincronizando connn ${instance}:`, error.response?.data || error.message);
             }
         }
         console.log("✅ Proceso de sincronización finalizado.");
