@@ -44,4 +44,11 @@ jobs:
           # Detener y eliminar el contenedor anterior si existe
           sudo docker stop auth-service-container || true && sudo docker rm auth-service-container || true
 
-          # Crear el archivo .env
+           # Crear el archivo .env desde el secreto de GitHub
+          echo "${{ secrets.ENV_FILE_AUTH }}" > .env
+
+          # Ejecutar el contenedor con el archivo .env
+          sudo docker run -d -p 4009:4009 -p 5009:5009 --env-file .env --name auth-service-container erickuce/auth-service:latest
+
+        
+
